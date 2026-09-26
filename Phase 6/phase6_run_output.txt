@@ -1,0 +1,112 @@
+df_clean shape: (499965, 26)
+P6-Q1 peak cell: {'weekday': 2, 'hour': 19, 'trip_count': 4879}
+P6-Q1 lowest cell: {'weekday': 1, 'hour': 4, 'trip_count': 409}
+P6-Q1 weekday totals:
+ weekday
+0    64233
+1    69927
+2    72225
+3    74776
+4    77217
+5    76206
+6    65381
+dtype: int64
+P6-Q2:
+          count       mean  median
+weekday                          
+0        64233  11.392450     8.1
+1        69927  11.210585     8.5
+2        72225  11.318146     8.5
+3        74776  11.541231     8.5
+4        77217  11.398597     8.5
+5        76206  11.014864     8.5
+6        65381  11.679165     8.5
+P6-Q2 mean range: 0.6643009300713363
+P6-Q2 mean high/low weekdays: 6 5
+P6-Q2 median high/low weekdays: 1 0
+P6-Q3 hourly mean fare table:
+ Traffic Condition  Congested Traffic  Dense Traffic  Flow Traffic
+hour                                                             
+0                          11.620967      11.910384     11.801670
+1                          11.701903      11.272334     11.351470
+2                          11.384968      11.522259     11.632388
+3                          12.292116      11.973794     11.962470
+4                          13.571078      13.962280     13.520533
+5                          15.163361      15.797460     14.570342
+6                          12.461521      12.347510     12.130442
+7                          10.942165      10.916038     11.003762
+8                          10.918375      10.882839     10.940893
+9                          10.955445      10.790605     10.709681
+10                         11.115478      10.713437     10.888948
+11                         11.158196      11.191882     11.223610
+12                         11.136327      11.142254     11.112512
+13                         11.631179      11.653266     11.662131
+14                         11.783787      12.007224     11.825583
+15                         12.094440      12.287742     11.888855
+16                         11.826416      11.843986     11.843157
+17                         11.516256      11.480005     11.136498
+18                         11.031715      10.916001     10.994859
+19                         10.634400      10.502318     10.670041
+20                         11.000830      10.761693     10.718514
+21                         11.075768      10.995860     10.926436
+22                         11.189761      11.368246     11.402170
+23                         11.545569      11.626298     11.503488
+P6-Q3 largest within-hour traffic mean spread: 1.2271181054598088 at hour 5
+P6-Q3 smallest within-hour traffic mean spread: 0.01757016594162586 at hour 16
+P6-Q4 observations after temporary positive-distance filter: 484715
+P6-Q4 excluded from temporary analysis due to missing/nonpositive distance: 15250
+P6-Q4 summary:
+                  count  mean_distance  ...  mean_fare_per_km  median_fare_per_km
+distance_range                         ...                                      
+0–<1             75890       0.686324  ...        635.147323            6.645955
+1–<2            146230       1.473806  ...          4.764888            4.452282
+2–<5            176155       3.125707  ...          3.479852            3.293799
+5–<10            61569       6.888633  ...          2.821519            2.691527
+10–<20           18971      13.644767  ...          2.642566            2.547241
+20+               5900      24.671327  ...          2.396997            2.441785
+
+[6 rows x 6 columns]
+P6-Q5 top 10 absolute correlation pairs:
+    feature_1 feature_2  pearson_r     abs_r
+72  sol_dist  nyc_dist   0.992120  0.992120
+64  ewr_dist  sol_dist   0.977466  0.977466
+65  ewr_dist  nyc_dist   0.969378  0.969378
+58  jfk_dist  lga_dist   0.587271  0.587271
+59  jfk_dist  sol_dist   0.461160  0.461160
+60  jfk_dist  nyc_dist   0.447220  0.447220
+66  ewr_dist  distance   0.432795  0.432795
+75  nyc_dist  distance   0.431408  0.431408
+69  lga_dist  nyc_dist   0.431180  0.431180
+73  sol_dist  distance   0.397423  0.397423
+P6-Q6 monthly summary:
+             trip_count  mean_fare  median_fare
+year_month                                    
+2009-01           6372   9.553666          7.3
+2009-02           6215   9.692261          7.7
+2009-03           6436   9.888999          7.7
+2009-04           6321   9.850682          7.7
+2009-05           6591  10.169049          7.7
+...                ...        ...          ...
+2015-02           5622  12.640114          9.5
+2015-03           5996  13.013524          9.5
+2015-04           5946  13.035288          9.5
+2015-05           5924  13.562736         10.0
+2015-06           5613  13.530057          9.5
+
+[78 rows x 3 columns]
+P6-Q6 date min/max: 2009-01-01 00:31:32 2015-06-30 23:38:21
+P6-Q6 year counts:
+ year
+2009    77002
+2010    75781
+2011    79529
+2012    80225
+2013    78030
+2014    74607
+2015    34791
+dtype: int64
+P6-Q6 monthly trip count max: 2011-03 7259
+P6-Q6 monthly trip count min: 2010-02 5086
+P6-Q6 mean fare max: 2015-05 13.562736326806212
+P6-Q6 mean fare min: 2010-02 9.466537554069996
+CHECKS: {'df_clean_rows': 499965, 'df_clean_cols': 26, 'p6q1_total_count': 499965, 'p6q2_total_count': 499965, 'p6q3_total_count': 499965, 'p6q4_positive_distance_n': 484715, 'p6q5_feature_count': 13, 'p6q6_total_count': 499965}

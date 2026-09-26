@@ -1,0 +1,61 @@
+P7-Q3
+df_clean shape: (499965, 26)
+positive distance observations: 484715
+temporary exclusions: 15250
+missing distance: 9996
+nonpositive distance: 5254
+missing fare: 0
+
+Daypart relationship summary:
+daypart  observations  distance_median_km  fare_mean  fare_median  pearson_r_distance_fare  spearman_r_distance_fare
+  00-05         61780            2.806065  12.102844          9.0                 0.791382                  0.895418
+  06-11        116925            2.027191  11.067905          8.1                 0.660364                  0.846825
+  12-17        139283            1.992384  11.641922          8.5                 0.636924                  0.837978
+  18-23        166727            2.283219  11.012924          8.5                 0.721940                  0.868097
+
+Weekday/weekend summary:
+week_group  observations  pearson_r_distance_fare  spearman_r_distance_fare  fare_median  fare_mean
+   Weekday        347485                 0.668272                  0.853016          8.5  11.361064
+   Weekend        137230                 0.724686                  0.868667          8.5  11.307314
+
+Hourly Pearson summary:
+ hour  observations  pearson_r_distance_fare  spearman_r_distance_fare
+    0         19032                 0.788005                  0.886966
+    1         14095                 0.789630                  0.887399
+    2         10523                 0.805157                  0.899998
+    3          7663                 0.754708                  0.901664
+    4          5650                 0.872353                  0.907230
+    5          4817                 0.753012                  0.909821
+    6         10022                 0.889246                  0.907198
+    7         17661                 0.670947                  0.875697
+    8         21928                 0.729048                  0.847145
+    9         22881                 0.758592                  0.839945
+   10         21766                 0.706297                  0.841446
+   11         22667                 0.479178                  0.837292
+   12         23904                 0.724946                  0.825603
+   13         23645                 0.760771                  0.833511
+   14         24613                 0.651165                  0.843070
+   15         23319                 0.777941                  0.850600
+   16         19931                 0.758318                  0.841927
+   17         23871                 0.422392                  0.836543
+   18         29151                 0.701541                  0.846599
+   19         30415                 0.629842                  0.853902
+   20         28358                 0.757789                  0.871939
+   21         27747                 0.771530                  0.877563
+   22         26957                 0.764647                  0.880010
+   23         24099                 0.749198                  0.888533
+
+Verification:
+                              check                                                            value                                                         expected pass
+                      df_clean_rows                                                           499965                                                           499965 True
+                   df_clean_columns                                                               26                                                               26 True
+positive_distance_observations_used                                                           484715                                                           484715 True
+               temporary_exclusions                                                            15250                                                            15250 True
+                   missing_distance                                                             9996                                                             9996 True
+               nonpositive_distance                                                             5254                                                             5254 True
+                       missing_fare                                                                0                                                                0 True
+                           dayparts                                                                4                                                                4 True
+          distance_bins_per_daypart                                                               10                                                               10 True
+          df_clean_sha256_unchanged 1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509 1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509 True
+
+SHA unchanged: True

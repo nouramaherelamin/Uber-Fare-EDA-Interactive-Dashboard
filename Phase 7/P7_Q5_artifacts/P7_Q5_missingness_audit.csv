@@ -1,0 +1,27 @@
+column,missing_count,missing_percent
+fare_amount,0,0.0
+distance,9996,1.9993399537967658
+passenger_count,1796,0.3592251457602032
+jfk_dist,10294,2.0589441260888264
+ewr_dist,10294,2.0589441260888264
+lga_dist,10294,2.0589441260888264
+sol_dist,10294,2.0589441260888264
+nyc_dist,10294,2.0589441260888264
+bearing,9912,1.98253877771444
+pickup_longitude,9439,1.8879321552508677
+pickup_latitude,9413,1.8827317912253858
+dropoff_longitude,9464,1.8929325052753694
+dropoff_latitude,9434,1.8869320852459672
+pickup_datetime,0,0.0
+hour,0,0.0
+day,0,0.0
+month,0,0.0
+weekday,0,0.0
+year,0,0.0
+Car Condition,0,0.0
+Weather,0,0.0
+Traffic Condition,0,0.0
+key,0,0.0
+User ID,0,0.0
+User Name,0,0.0
+Driver Name,0,0.0

@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uber Fare Prediction — EDA to Validated ML</title>
+<meta name="description" content="14-slide HTML presentation for the Cellula Technologies Uber Fare Prediction project.">
+<style>
+:root{
+  --bg:#07111f; --panel:#0d1b2d; --panel2:#11243a; --ink:#eef5ff; --muted:#9db0c8;
+  --line:rgba(255,255,255,.10); --accent:#58d6c7; --accent2:#6ea8ff; --warn:#ffbd66;
+  --danger:#ff7f8f; --good:#78e08f; --shadow:0 24px 70px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{overflow:hidden}
+.presentation{height:100vh;position:relative}
+.slide{position:absolute;inset:0;padding:56px 7vw 125px;display:none;overflow:auto;background:
+ radial-gradient(circle at 85% 8%,rgba(88,214,199,.10),transparent 27%),
+ radial-gradient(circle at 10% 95%,rgba(110,168,255,.08),transparent 28%),var(--bg)}
+.slide.active{display:block;animation:enter .28s ease both}@keyframes enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.slide-inner{max-width:1240px;margin:0 auto;min-height:100%;display:flex;flex-direction:column}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:750;margin-bottom:13px}
+h1{font-size:clamp(38px,5vw,72px);line-height:.98;margin:0 0 18px;letter-spacing:-.045em}h2{font-size:clamp(28px,3.5vw,48px);line-height:1.02;margin:0 0 12px;letter-spacing:-.035em}h3{margin:0 0 8px;font-size:18px}p{color:var(--muted);font-size:15px;line-height:1.55;margin:0 0 10px}.lead{font-size:19px;max-width:760px}.sub{font-size:13px;color:var(--muted)}
+.topline{display:flex;justify-content:space-between;gap:20px;align-items:center}.slide-num{color:var(--muted);font-variant-numeric:tabular-nums;font-size:12px}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:linear-gradient(145deg,rgba(17,36,58,.94),rgba(10,25,42,.88));border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+.card.tight{padding:14px}.metric{font-size:30px;font-weight:800;letter-spacing:-.04em}.metric small{font-size:12px;color:var(--muted);font-weight:600;letter-spacing:0}.metric-label{font-size:12px;color:var(--muted);margin-top:5px}
+.kicker{display:inline-flex;gap:8px;align-items:center;padding:7px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:12px}.dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.question{margin:22px 0 16px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}.question .qtag{color:#07111f;background:var(--accent);font-weight:850;border-radius:8px;padding:6px 8px;font-size:11px}.question strong{font-size:18px;line-height:1.35}
+.insight{margin-top:14px;border-left:3px solid var(--accent);padding:12px 14px;background:rgba(88,214,199,.07);border-radius:0 12px 12px 0}.insight b{color:var(--ink)}
+.note{color:var(--muted);font-size:11px;line-height:1.45}.source{margin-top:auto;padding-top:14px;padding-bottom:12px;color:#71859f;font-size:10px;line-height:1.5;border-top:1px solid rgba(255,255,255,.06);position:relative;z-index:5}
+img.chart{width:100%;height:auto;max-height:370px;object-fit:contain;background:#fff;border-radius:12px;padding:6px}.img-dark{background:#fff}
+.figure{display:flex;flex-direction:column;gap:8px}.caption{font-size:11px;color:var(--muted)}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px}.pill{border:1px solid var(--line);border-radius:999px;padding:7px 10px;color:#c9d8e9;font-size:12px}.pill.accent{border-color:rgba(88,214,199,.35);background:rgba(88,214,199,.08)}
+.flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:26px 0}.flow .node{padding:15px 18px;border:1px solid var(--line);background:var(--panel);border-radius:14px;font-weight:750}.arrow{color:var(--accent);font-size:22px}
+.timeline{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:26px 0}.time{height:58px;border:1px solid var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:750;font-size:12px;background:var(--panel)}.time.train{background:rgba(110,168,255,.13)}.time.val{background:rgba(88,214,199,.13)}.time.test{background:rgba(255,189,102,.14)}
+.legend{display:flex;gap:15px;flex-wrap:wrap;font-size:11px;color:var(--muted)}.legend span{display:inline-flex;align-items:center;gap:6px}.swatch{width:10px;height:10px;border-radius:3px}.blue{background:var(--accent2)}.teal{background:var(--accent)}.amber{background:var(--warn)}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left}th{color:#b8c9dc;font-weight:750}td{color:#dbe7f5}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}.selected{background:rgba(88,214,199,.08)}
+.experiment{height:250px;position:relative;padding:15px 12px 24px}.bars{height:190px;display:flex;align-items:flex-end;gap:10px;border-bottom:1px solid var(--line);padding:0 8px}.barwrap{height:100%;display:flex;align-items:flex-end;flex:1;min-width:0}.bar{width:100%;background:linear-gradient(180deg,var(--accent),#2e8f88);border-radius:7px 7px 0 0;min-height:3px}.bar-label{font-size:9px;color:var(--muted);text-align:center;margin-top:5px;white-space:nowrap}.bar-value{font-size:9px;color:#dcebf9;text-align:center;margin-bottom:4px}.selection{position:absolute;left:0;right:0;bottom:2px;border-top:1px dashed rgba(255,255,255,.18)}
+.model-box{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.model-main{padding:22px;border:1px solid rgba(88,214,199,.28);border-radius:18px;background:linear-gradient(145deg,rgba(88,214,199,.10),rgba(13,27,45,.92))}.model-name{font-size:28px;font-weight:850;letter-spacing:-.03em}.codeish{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#d9f7f2;font-size:12px;line-height:1.7}.feature-cloud{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.feature{padding:6px 8px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:7px;font-size:10px;color:#cbd9e8}
+.errorbars{display:grid;gap:10px;margin-top:12px}.err-row{display:grid;grid-template-columns:70px 1fr 64px;gap:9px;align-items:center;font-size:11px}.track{height:12px;background:#182a3e;border-radius:99px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:99px}.danger .fill{background:linear-gradient(90deg,var(--warn),var(--danger))}
+.footer-nav{position:fixed;left:0;right:0;bottom:0;height:82px;background:rgba(5,14,25,.88);backdrop-filter:blur(14px);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:center;z-index:20}.nav-inner{width:min(1240px,86vw);display:flex;align-items:center;gap:14px}.nav-btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);width:36px;height:36px;border-radius:10px;cursor:pointer}.nav-btn:hover{border-color:rgba(88,214,199,.5)}.progress{flex:1;height:5px;background:#18283b;border-radius:99px;overflow:hidden}.progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));width:7.14%;transition:width .25s ease}.counter{font-size:11px;color:var(--muted);min-width:45px;text-align:right;font-variant-numeric:tabular-nums}.toc{display:flex;gap:4px}.toc button{width:7px;height:7px;border:0;border-radius:50%;background:#34485f;cursor:pointer;padding:0}.toc button.active{background:var(--accent)}
+.big-number{font-size:clamp(54px,7vw,96px);font-weight:900;letter-spacing:-.07em;line-height:.9}.gradient-text{background:linear-gradient(90deg,var(--ink),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}.warning{color:var(--warn)}.danger-text{color:var(--danger)}
+.checklist{display:grid;gap:10px}.check{display:flex;gap:10px;align-items:flex-start}.check i{width:19px;height:19px;border-radius:6px;background:rgba(120,224,143,.13);border:1px solid rgba(120,224,143,.35);color:var(--good);font-style:normal;text-align:center;font-size:12px;line-height:18px;flex:none}.check span{font-size:13px;color:#d7e4f2;line-height:1.4}
+@media(max-width:900px){.slide{padding:34px 5vw 130px}.g2,.model-box{grid-template-columns:1fr}.g3{grid-template-columns:1fr 1fr}.g4{grid-template-columns:1fr 1fr}.timeline{grid-template-columns:repeat(4,1fr)}img.chart{max-height:280px}.bars{gap:4px}.bar-label{font-size:7px}.question strong{font-size:16px}}
+@media(max-width:560px){h1{font-size:42px}.g3,.g4{grid-template-columns:1fr}.timeline{grid-template-columns:repeat(2,1fr)}.slide{padding:28px 18px 135px}.topline{align-items:flex-start}.toc{display:none}}
+@media print{body{overflow:visible;background:#fff;color:#111}.footer-nav{display:none}.slide{position:relative;display:block;page-break-after:always;min-height:100vh;background:#fff;color:#111}.card{box-shadow:none;background:#fff;border:1px solid #ddd}p,.sub,.note,.caption,.source{color:#555}}
+
+.footer-credit{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:7px;
+  text-align:center;
+  color:#9db0c8;
+  font-size:10px;
+  line-height:1.2;
+  white-space:nowrap;
+  z-index:101;
+}
+.footer-credit b{color:#eef5ff;font-weight:700}
+.footer-credit a{color:#58d6c7;text-decoration:none;font-weight:600;margin:0 4px}
+.footer-credit a:hover{text-decoration:underline}
+
+</style>
+</head>
+<body>
+<div class="presentation" id="presentation">
+<section class="slide active" data-title="Title"><div class="slide-inner">
+  <div class="eyebrow">Cellula Technologies · ML Internship</div>
+  <div style="margin-top:9vh"><div class="kicker"><span class="dot"></span> Uber Fare Prediction · EDA → Validated ML</div>
+  <h1 style="margin-top:22px">From exploratory evidence<br><span class="gradient-text">to a locked regression model.</span></h1>
+  <p class="lead">A concise analytical journey from data quality and EDA through controlled experiments, an untouched later-period test set, and explicit error analysis.</p>
+  <div class="pill-row" style="margin-top:26px"><span class="pill">499,965 cleaned trips</span><span class="pill">2009 → 2015 H1</span><span class="pill">Regression</span><span class="pill">RANDOM_STATE = 42</span></div></div>
+  <div class="source">Evidence base: completed Phase 3–7 reports and verified Task 2 execution artifacts. Presentation implementation does not modify analytical sources.</div>
+</div></section>
+
+<section class="slide" data-title="Problem"><div class="slide-inner">
+  <div class="topline"><div><div class="eyebrow">02 · Analytical problem</div><h2>Can trip information support fare prediction?</h2></div><div class="slide-num">02 / 14</div></div>
+  <p class="lead">The project treats <b>fare_amount</b> as a continuous regression target and asks how trip-level, temporal, geographic, distance, reference-distance, passenger and categorical information can support prediction.</p>
+  <div class="flow"><div class="node">Trip information</div><div class="arrow">→</div><div class="node">EDA evidence</div><div class="arrow">→</div><div class="node">Controlled ML experiments</div><div class="arrow">→</div><div class="node" style="border-color:rgba(88,214,199,.35)">Fare prediction</div></div>
+  <div class="grid g3" style="margin-top:20px"><div class="card"><h3>Analytical target</h3><div class="metric">fare_amount</div><div class="metric-label">continuous fare value</div></div><div class="card"><h3>Evidence discipline</h3><div class="metric">Q → P → I</div><div class="metric-label">Question → Plot → Insight</div></div><div class="card"><h3>Modeling discipline</h3><div class="metric">Time-aware</div><div class="metric-label">later-period holdout</div></div></div>
+  <div class="insight"><b>Storyline:</b> descriptive EDA is used to generate hypotheses; predictive usefulness is decided only by controlled validation experiments.</div>
+  <div class="source">Source: Task 1 project handoff / Phase 5–7 evidence; Task 2 execution report.</div>
+</div></section>
+
+<section class="slide" data-title="Dataset"><div class="slide-inner">
+  <div class="topline"><div><div class="eyebrow">03 · Dataset & scope</div><h2>One cleaned dataset, one chronological evaluation story.</h2></div><div class="slide-num">03 / 14</div></div>
+  <div class="grid g4" style="margin-top:20px"><div class="card"><div class="metric">499,965</div><div class="metric-label">rows in df_clean</div></div><div class="card"><div class="metric">26</div><div class="metric-label">columns</div></div><div class="card"><div class="metric">2009–2015</div><div class="metric-label">temporal coverage</div></div><div class="card"><div class="metric">34,791</div><div class="metric-label">2015 H1 test rows</div></div></div>
+  <div class="timeline"><div class="time train">2009</div><div class="time train">2010</div><div class="time train">2011</div><div class="time train">2012</div><div class="time train">2013</div><div class="time val">2014 · Validation</div><div class="time test">2015 H1 · Test</div></div>
+  <div class="legend"><span><i class="swatch blue"></i> Train · 2009–2013</span><span><i class="swatch teal"></i> Validation · 2014</span><span><i class="swatch amber"></i> Test · 2015-01-01 → 2015-06-30</span></div>
+  <div class="grid g3" style="margin-top:20px"><div class="card"><h3>Train</h3><div class="metric">390,567</div><div class="metric-label">2009-01-01 → 2013-12-31</div></div><div class="card"><h3>Validation</h3><div class="metric">74,607</div><div class="metric-label">2014 calendar year</div></div><div class="card"><h3>Test</h3><div class="metric">34,791</div><div class="metric-label">2015 H1, untouched until final lock</div></div></div>
+  <div class="source">Sources: Phase 6 temporal coverage; Task 2 split manifest / split-validation report. No random within-year split was used.</div>
+</div></section>
+
+<section class="slide" data-title="Data quality"><div class="slide-inner">
+  <div class="topline"><div><div class="eyebrow">04 · Data quality / preparation</div><h2>Quality checks informed the workflow without rewriting the source.</h2></div><div class="slide-num">04 / 14</div></div>
+  <div class="grid g2" style="margin-top:18px"><div class="card"><div class="checklist">
+    <div class="check"><i>✓</i><span><b>499,965 × 26</b> final cleaned dataset.</span></div>
+    <div class="check"><i>✓</i><span><b>0</b> missing target values.</span></div>
+    <div class="check"><i>✓</i><span><b>0</b> exact duplicate rows.</span></div>
+    <div class="check"><i>✓</i><span>Intentional predictor missingness retained for modeling decisions.</span></div>
+    <div class="check"><i>✓</i><span>Duplicate keys reviewed and kept together across splits: <b>0 cross-split duplicate keys</b>.</span></div>
+  </div></div>
+  <div class="card"><h3>Source integrity lock</h3><p class="codeish">SHA-256<br>1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509</p><div class="insight"><b>READ-ONLY:</b> the verified hash was identical before and after Task 2.</div><p class="note" style="margin-top:12px">Identifier-like fields were reviewed separately from analytical predictors; the audit did not establish leakage merely from identifier structure.</p></div></div>
+  <div class="grid g2" style="margin-top:16px"><div class="figure"><img class="chart" src="assets/audit_check_status.png" alt="Verified Phase 7 audit check status"><div class="caption">Existing verified P7-Q5 audit visual: all 23 numeric/temporal integrity checks passed.</div></div><div class="card"><h3>Preparation principle</h3><p>No permanent feature engineering was applied to <b>df_clean</b>. Modeling transformations were performed inside the modeling workflow rather than altering the source dataset.</p><div class="pill-row"><span class="pill accent">Read-only source</span><span class="pill">Pipeline handling</span><span class="pill">Leakage-aware split</span></div></div></div>
+  <div class="source">Sources: P7-Q5 risk/data-quality audit; Task 2 split validation and final verification.</div>
+</div></section>
+
+<section class="slide" data-title="Fare target"><div class="slide-inner">
+  <div class="topline"><div><div class="eyebrow">05 · Target behavior</div><h2>The target is strongly right-skewed — the tail matters.</h2></div><div class="slide-num">05 / 14</div></div>
+  <div class="question"><span class="qtag">QUESTION</span><strong>What does the fare target look like after the Phase 3 cleaning?</strong></div>
+  <div class="grid g2"><div class="figure"><img class="chart" src="assets/fare_distribution_p99.png" alt="Fare distribution with visualization clipped at P99"><div class="caption">P7-Q1 verified visual; clipping is visualization-only.</div></div><div class="card"><div class="grid g2"><div><div class="metric">$11.3594</div><div class="metric-label">mean</div></div><div><div class="metric">$8.50</div><div class="metric-label">median</div></div><div><div class="metric">$52.136</div><div class="metric-label">P99</div></div><div><div class="metric">$500</div><div class="metric-label">maximum</div></div></div><div class="insight"><b>Skewness = 4.8999.</b> The upper tail is small in share but large in magnitude.</div><p style="margin-top:12px">Above P99: <b>5,000</b> observations. Above $100: <b>214</b>; above $200: <b>26</b>; above $300: <b>7</b>; above $400: <b>5</b>.</p></div></div>
+  <div class="grid g2" style="margin-top:16px"><div class="figure"><img class="chart" src="assets/upper_tail_vs_distance.png" alt="Upper tail fares versus distance"><div class="caption">Upper-tail fares are not exclusively long-trip observations.</div></div><div class="insight"><b>INSIGHT:</b> Fare skewness and extreme values are modeling risks to investigate, not evidence that all high-fare records are invalid.</div></div>
+  <div class="source">Source: P7-Q1 target behavior report and verified P7-Q1 plots.</div>
+</div></section>
+
+<section class="slide" data-title="Core EDA"><div class="slide-inner">
+  <div class="topline"><div><div class="eyebrow">06 · Core EDA findings</div><h2>Marginal effects are mostly small; time shows clearer structure.</h2></div><div class="slide-num">06 / 14</div></div>
+  <div class="question"><span class="qtag">QUESTION</span><strong>Which required Task 1 variables show noticeable fare differences?</strong></div>
+  <div class="grid g3"><div class="card"><h3>Passenger count</h3><div class="metric">r = 0.01275</div><div class="metric-label">Pearson correlation</div><p style="margin-top:10px">1,796 passenger-count values were missing.</p></div><div class="card"><h3>Car condition</h3><div class="metric">$0.0886</div><div class="metric-label">mean-fare range</div><p style="margin-top:10px">All category medians = $8.50.</p></div><div class="card"><h3>Traffic condition</h3><div class="metric">$0.0739</div><div class="metric-label">mean-fare range</div><p style="margin-top:10px">All category medians = $8.50.</p></div></div>
+  <div class="grid g2" style="margin-top:16px"><div class="card"><h3>Hourly fare pattern</h3><div class="grid g2"><div><div class="metric">$10.00</div><div class="metric-label">highest median · 04:00</div></div><div><div class="metric">$15.1696</div><div class="metric-label">highest mean · 05:00</div></div></div><p style="margin-top:10px">Mean and median differ because the fare target is right-skewed.</p></div><div class="figure"><img class="chart" src="assets/traffic_hour_fare.png" alt="Traffic condition by hour fare chart"><div class="caption">Existing verified Phase 6 visual: traffic-condition mean fares vary by hour.</div></div></div>
+  <div class="insight"><b>INSIGHT:</b> Passenger count, car condition and traffic show small marginal fare separations in the full cleaned dataset. Hourly patterns are more visibly structured, supporting temporal features as a modeling hypothesis.</div>
+  <div class="source">Source: Phase 5 Q1–Q4 report; Phase 6 traffic-by-hour visual.</div>
+</div></section>
+
+<section class="slide" data-title="Distance relationship"><div class="slide-inner">
+  <div class="topline"><div><div class="eyebrow">07 · Distance–fare relationship</div><h2>Distance carries the clearest numerical signal in the EDA comparison.</h2></div><div class="slide-num">07 / 14</div></div>
+  <div class="question"><span class="qtag">QUESTION</span><strong>How does trip distance relate to fare?</strong></div>
+  <div class="grid g2"><div class="figure"><img class="chart" src="assets/distance_fare_scatter.png" alt="Distance versus fare scatter plot"><div class="caption">Existing verified Phase 6 distance–fare scatter.</div></div><div class="card"><div class="metric">r = 0.670893</div><div class="metric-label">Pearson · distance vs fare</div><table style="margin-top:14px"><tr><th>Variable</th><th class="num">Pearson r</th></tr><tr><td><b>distance</b></td><td class="num"><b>0.670893</b></td></tr><tr><td>nyc_dist</td><td class="num">0.290524</td></tr><tr><td>ewr_dist</td><td class="num">0.275987</td></tr><tr><td>jfk_dist</td><td class="num">−0.265021</td></tr><tr><td>sol_dist</td><td class="num">0.248432</td></tr><tr><td>lga_dist</td><td class="num">0.079585</td></tr><tr><td>bearing</td><td class="num">−0.024115</td></tr></table></div></div>
+  <div class="insight"><b>INSIGHT:</b> Within the specified numerical EDA comparison, distance has the strongest observed numerical association with fare. This is an EDA relationship — <b>not model feature importance and not causality.</b></div>
+  <div class="source">Sources: Phase 5 Q5 report; Phase 6 Q4 distance/fare evidence.</div>
+</div></section>
+
+<section class="slide" data-title="Distance functional form"><div class="slide-inner">
+  <div class="topline"><div><div class="eyebrow">08 · Distance functional form</div><h2>Fare rises with distance, but fare per kilometer declines.</h2></div><div class="slide-num">08 / 14</div></div>
+  <div class="question"><span class="qtag">QUESTION</span><strong>Does fare increase at a constant rate as trip distance grows?</strong></div>
+  <div class="grid g2"><div class="figure"><img class="chart" src="assets/distance_binned_median.png" alt="Binned median fare versus distance"><div class="caption">Verified P7-Q2 visual: 20 equal-frequency distance bins with median-fare overlay.</div></div><div class="figure"><img class="chart" src="assets/fare_per_km_range.png" alt="Median fare per kilometer by distance range"><div class="caption">Verified Phase 6 visual: median fare per km by distance range.</div></div></div>
+  <div class="grid g4" style="margin-top:16px"><div class="card"><div class="metric">0.682655</div><div class="metric-label">raw Pearson · positive distance</div></div><div class="card"><div class="metric">0.856920</div><div class="metric-label">raw Spearman</div></div><div class="card"><div class="metric">0.762296</div><div class="metric-label">log1p(distance) vs raw fare</div></div><div class="card"><div class="metric">0.866498</div><div class="metric-label">log1p(distance) vs log1p(fare)</div></div></div>
+  <div class="insight"><b>INSIGHT:</b> The evidence justified testing a transformed distance representation — but Task 2 had to determine whether it actually improved prediction.</div>
+  <div class="source">Sources: P7-Q2 functional-form report; Phase 6 Q4 fare-per-km evidence. Positive-distance analysis intentionally excludes nonpositive distances only in that diagnostic.</div>
+</div></section>
+
+<section class="slide" data-title="Temporal geography"><div class="slide-inner">
+  <div class="topline"><div><div class="eyebrow">09 · Temporal / geographic evidence</div><h2>Time structure and spatial redundancy shaped the modeling hypotheses.</h2></div><div class="slide-num">09 / 14</div></div>
+  <div class="grid g2"><div class="figure"><img class="chart" src="assets/hour_weekday_demand.png" alt="Hour by weekday trip demand heatmap"><div class="caption">Verified Phase 6 heatmap. Peak cell: Wednesday 19:00 = 4,879 trips.</div></div><div class="figure"><img class="chart" src="assets/distance_by_daypart.png" alt="Distance by daypart"><div class="caption">Distance distribution by daypart.</div></div><div class="figure"><img class="chart" src="assets/reference_redundancy.png" alt="Reference-distance redundancy heatmap"><div class="caption">Verified P7-Q4 evidence: strong redundancy among several reference distances.</div></div></div>
+  <div class="grid g3" style="margin-top:16px"><div class="card"><h3>Temporal</h3><div class="metric">4,879</div><div class="metric-label">Wednesday 19:00 peak cell</div><p style="margin-top:8px">Lowest cell: Tuesday 04:00 = 409.</p></div><div class="card"><h3>Airport distance</h3><div class="metric">mixed</div><div class="metric-label">directions across JFK/EWR/LGA</div><p style="margin-top:8px">JFK −0.2650 · EWR +0.2760 · LGA +0.0796.</p></div><div class="card"><h3>Redundancy</h3><div class="metric">0.9921</div><div class="metric-label">sol_dist ↔ nyc_dist</div><p style="margin-top:8px">EWR↔SOL 0.9775 · EWR↔NYC 0.9694.</p></div></div>
+  <div class="insight"><b>INSIGHT:</b> The EDA supports testing temporal and geographic information, while highly correlated reference distances should be treated as a modeling consideration rather than automatically discarded.</div>
+  <div class="source">Sources: Phase 6 Q1/Q5 outputs; P7-Q4 accepted evidence. P7-Q4 itself was not rerun during presentation implementation.</div>
+</div></section>
+
+<section class="slide" data-title="Modeling strategy"><div class="slide-inner">
+  <div class="topline"><div><div class="eyebrow">10 · Modeling strategy</div><h2>EDA became hypotheses; validation became the decision mechanism.</h2></div><div class="slide-num">10 / 14</div></div>
+  <div class="grid g2" style="margin-top:20px"><div class="card"><h3>Controlled progression</h3><div class="flow" style="margin:16px 0 0"><div class="node">Baseline</div><div class="arrow">→</div><div class="node">Distance</div><div class="arrow">→</div><div class="node">Temporal</div><div class="arrow">→</div><div class="node">Geographic</div><div class="arrow">→</div><div class="node">Reference</div><div class="arrow">→</div><div class="node">Categorical</div><div class="arrow">→</div><div class="node">Missingness</div><div class="arrow">→</div><div class="node">log1p target</div></div></div>
+  <div class="card"><h3>Protocol controls</h3><div class="checklist"><div class="check"><i>✓</i><span>Chronological train / validation / test split.</span></div><div class="check"><i>✓</i><span>Duplicate keys kept together across splits.</span></div><div class="check"><i>✓</i><span>Test set untouched until final locked comparison.</span></div><div class="check"><i>✓</i><span>MAE, RMSE and R² tracked.</span></div><div class="check"><i>✓</i><span>No uncontrolled hyperparameter search.</span></div><div class="check"><i>✓</i><span>df_clean remains read-only.</span></div></div></div></div>
+  <div class="card" style="margin-top:16px"><h3>Algorithms / configurations</h3><p><b>Constant baseline</b> → <b>Ridge</b> → <b>HistGradientBoostingRegressor</b> with the fixed approved configuration. The final target experiment compares raw fare with <b>log1p(fare_amount)</b>.</p></div>
+  <div class="insight"><b>INSIGHT:</b> The workflow tests one controlled change at a time so improvements can be attributed to the declared experiment rather than an uncontrolled search.</div>
+  <div class="source">Source: Task 2 modeling plan, split-validation report, modeling configuration and complete execution report.</div>
+</div></section>
+
+<section class="slide" data-title="Experiments"><div class="slide-inner">
+  <div class="topline"><div><div class="eyebrow">11 · Controlled experiments</div><h2>Validation metrics improved across the declared progression — but not uniformly.</h2></div><div class="slide-num">11 / 14</div></div>
+  <div class="card" style="margin-top:16px"><div class="experiment"><div class="bars">
+    <div class="barwrap"><div style="width:100%"><div class="bar-value">6.521</div><div class="bar" style="height:100%"></div><div class="bar-label">E01</div></div></div>
+    <div class="barwrap"><div style="width:100%"><div class="bar-value">4.009</div><div class="bar" style="height:61.5%"></div><div class="bar-label">E02</div></div></div>
+    <div class="barwrap"><div style="width:100%"><div class="bar-value">2.856</div><div class="bar" style="height:43.8%"></div><div class="bar-label">E03</div></div></div>
+    <div class="barwrap"><div style="width:100%"><div class="bar-value">2.856</div><div class="bar" style="height:43.8%"></div><div class="bar-label">E04</div></div></div>
+    <div class="barwrap"><div style="width:100%"><div class="bar-value">2.498</div><div class="bar" style="height:38.3%"></div><div class="bar-label">E05</div></div></div>
+    <div class="barwrap"><div style="width:100%"><div class="bar-value">2.130</div><div class="bar" style="height:32.7%"></div><div class="bar-label">E06</div></div></div>
+    <div class="barwrap"><div style="width:100%"><div class="bar-value">2.114</div><div class="bar" style="height:32.4%"></div><div class="bar-label">E07</div></div></div>
+    <div class="barwrap"><div style="width:100%"><div class="bar-value">2.112</div><div class="bar" style="height:32.4%"></div><div class="bar-label">E08</div></div></div>
+    <div class="barwrap"><div style="width:100%"><div class="bar-value">2.095</div><div class="bar" style="height:32.1%"></div><div class="bar-label">E09</div></div></div>
+    <div class="barwrap"><div style="width:100%"><div class="bar-value">2.040</div><div class="bar" style="height:31.3%"></div><div class="bar-label">E10</div></div></div>
+  </div><div class="sub" style="margin-top:7px">Validation MAE progression · lower is better</div></div></div>
+  <div class="grid g2" style="margin-top:16px"><div class="card"><table><tr><th>Experiment</th><th class="num">MAE</th><th class="num">RMSE</th><th class="num">R²</th></tr><tr><td>E01 Constant</td><td class="num">6.520924</td><td class="num">11.381812</td><td class="num">−0.033938</td></tr><tr><td>E02 Ridge</td><td class="num">4.008651</td><td class="num">7.736223</td><td class="num">0.522328</td></tr><tr><td>E03 HGB baseline</td><td class="num">2.856050</td><td class="num">6.003070</td><td class="num">0.712380</td></tr><tr><td>E05 Temporal</td><td class="num">2.498246</td><td class="num">5.447252</td><td class="num">0.763175</td></tr><tr><td>E06 Geographic</td><td class="num">2.129567</td><td class="num">4.807872</td><td class="num">0.815508</td></tr></table></div><div class="card"><table><tr><th>Experiment</th><th class="num">MAE</th><th class="num">RMSE</th><th class="num">R²</th></tr><tr><td>E07 Reference distance</td><td class="num">2.113989</td><td class="num">4.746566</td><td class="num">0.820183</td></tr><tr><td>E08 Categorical</td><td class="num">2.112468</td><td class="num">4.741573</td><td class="num">0.820561</td></tr><tr class="selected"><td><b>E09 Missing-value strategy</b></td><td class="num"><b>2.094547</b></td><td class="num"><b>4.733094</b></td><td class="num"><b>0.821202</b></td></tr><tr class="selected"><td><b>E10 log1p target</b></td><td class="num"><b>2.039646</b></td><td class="num">4.968136</td><td class="num">0.803003</td></tr></table></div></div>
+  <div class="insight"><b>IMPORTANT:</b> E04 exactly matched E03. E10 had the lowest validation MAE, while E09 had better validation RMSE and R².</div>
+  <div class="source">Source: task2_experiment_results_validation.csv / Task 2 complete execution report. All values are validation-only at this stage.</div>
+</div></section>
+
+<section class="slide" data-title="Final model"><div class="slide-inner">
+  <div class="topline"><div><div class="eyebrow">12 · Selection + locked model</div><h2>Selection followed the declared criterion — not an overall score.</h2></div><div class="slide-num">12 / 14</div></div>
+  <div class="model-box" style="margin-top:18px"><div class="model-main"><div class="model-name">HistGradientBoostingRegressor</div><p style="margin-top:7px">Final target: <span class="codeish">log1p(fare_amount)</span></p><div class="pill-row" style="margin-top:12px"><span class="pill accent">Selected under the predefined validation-MAE criterion.</span><span class="pill">RANDOM_STATE = 42</span><span class="pill">No tuning search</span></div><h3 style="margin-top:20px">Final feature set</h3><div class="feature-cloud"><span class="feature">log1p(distance)</span><span class="feature">passenger_count</span><span class="feature">hour</span><span class="feature">weekday</span><span class="feature">month</span><span class="feature">year</span><span class="feature">pickup_longitude</span><span class="feature">pickup_latitude</span><span class="feature">dropoff_longitude</span><span class="feature">dropoff_latitude</span><span class="feature">bearing</span><span class="feature">jfk_dist</span><span class="feature">ewr_dist</span><span class="feature">lga_dist</span><span class="feature">sol_dist</span><span class="feature">nyc_dist</span><span class="feature">Car Condition</span><span class="feature">Weather</span><span class="feature">Traffic Condition</span></div></div>
+  <div class="card"><h3>Why E10 was selected</h3><div class="metric">MAE 2.039646</div><div class="metric-label">lowest validation MAE</div><div class="insight" style="margin-top:16px"><b>E09:</b> MAE 2.094547 · RMSE 4.733094 · R² 0.821202</div><div class="insight"><b>E10:</b> MAE 2.039646 · RMSE 4.968136 · R² 0.803003</div><p style="margin-top:14px">Therefore the selection is explicitly tied to the declared primary criterion. It is not a claim of universal superiority.</p></div></div>
+  <div class="insight"><b>LOCK:</b> Train + validation (2009–2014) were used to fit the selected candidate before the final evaluation on 2015 H1.</div>
+  <div class="source">Source: Task 2 complete execution report, model artifact and modeling configuration. No feature importance / SHAP analysis was performed.</div>
+</div></section>
+
+<section class="slide" data-title="Test performance"><div class="slide-inner">
+  <div class="topline"><div><div class="eyebrow">13 · Final test performance</div><h2>2015 H1 is the untouched later-period test.</h2></div><div class="slide-num">13 / 14</div></div>
+  <div class="grid g3" style="margin-top:18px"><div class="card"><div class="metric">1.973790</div><div class="metric-label">MAE</div></div><div class="card"><div class="metric">5.884111</div><div class="metric-label">RMSE</div></div><div class="card"><div class="metric">0.759844</div><div class="metric-label">R²</div></div></div>
+  <div class="grid g2" style="margin-top:16px"><div class="card"><h3>Absolute error by distance</h3><div class="errorbars"><div class="err-row"><span>0–&lt;1</span><div class="track"><div class="fill" style="width:19.4%"></div></div><b>1.524</b></div><div class="err-row"><span>1–&lt;2</span><div class="track"><div class="fill" style="width:14.5%"></div></div><b>1.140</b></div><div class="err-row"><span>2–&lt;5</span><div class="track"><div class="fill" style="width:20.8%"></div></div><b>1.638</b></div><div class="err-row"><span>5–&lt;10</span><div class="track"><div class="fill" style="width:35.5%"></div></div><b>2.787</b></div><div class="err-row"><span>10–&lt;20</span><div class="track"><div class="fill" style="width:60.3%"></div></div><b>4.742</b></div><div class="err-row danger"><span>20+</span><div class="track"><div class="fill" style="width:100%"></div></div><b>7.859</b></div></div><p style="margin-top:12px">MAE by distance band. RMSE reaches <b>27.360</b> for 20+ km.</p></div>
+  <div class="card"><h3>Upper-fare tail</h3><div class="grid g2"><div><div class="metric">166</div><div class="metric-label">test observations above P99 = $57.54</div></div><div><div class="metric danger-text">37.467</div><div class="metric-label">MAE in upper tail</div></div><div><div class="metric danger-text">69.046</div><div class="metric-label">RMSE in upper tail</div></div><div><div class="metric">$90.79</div><div class="metric-label">mean actual fare</div></div></div><div class="insight"><b>Mean prediction = $54.09</b> for this upper-tail group.</div><p style="margin-top:12px">Overall test P90 absolute error = 4.114; P95 = 6.067; P99 = 14.282.</p></div></div>
+  <div class="insight"><b>INSIGHT:</b> The final model has useful overall test performance, but error grows clearly with trip length and becomes much larger in the upper-fare tail.</div>
+  <div class="source">Sources: final_test_predictions.csv, final_test_error_by_distance.csv, final_test_upper_tail_error.csv and Task 2 final verification.</div>
+</div></section>
+
+<section class="slide" data-title="Conclusions"><div class="slide-inner">
+  <div class="topline"><div><div class="eyebrow">14 · Conclusions, limitations & next steps</div><h2>What the completed evidence supports — and what remains open.</h2></div><div class="slide-num">14 / 14</div></div>
+  <div class="grid g2" style="margin-top:18px"><div class="card"><h3>Supported conclusions</h3><div class="checklist"><div class="check"><i>✓</i><span>Distance had the strongest observed numerical association with fare among the specified EDA variables.</span></div><div class="check"><i>✓</i><span>Fare is strongly right-skewed with a meaningful upper tail.</span></div><div class="check"><i>✓</i><span>Temporal and geographic information added predictive information during controlled validation experiments.</span></div><div class="check"><i>✓</i><span>E10 was selected under the predefined validation-MAE criterion.</span></div><div class="check"><i>✓</i><span>Final 2015 H1 test: MAE 1.973790 · RMSE 5.884111 · R² 0.759844.</span></div></div></div>
+  <div class="card"><h3>Limitations / next steps</h3><div class="checklist"><div class="check"><i>!</i><span><b class="warning">Long-distance trips remain a clear weakness.</b></span></div><div class="check"><i>!</i><span><b class="warning">Upper-fare tail remains a clear weakness.</b></span></div><div class="check"><i>!</i><span>Later-period behavior differs in its error profile; RMSE rises and R² falls from validation to the 2015 H1 test.</span></div><div class="check"><i>→</i><span>Future work could investigate tail-aware/robust modeling and temporal drift in a separately approved experiment.</span></div><div class="check"><i>→</i><span>No business ROI, deployment readiness, SHAP, or new model result was measured here.</span></div></div></div></div>
+  <div class="card" style="margin-top:16px;background:linear-gradient(145deg,rgba(88,214,199,.09),rgba(17,36,58,.95))"><div class="big-number gradient-text">Question → Plot → Insight → Test → Learn</div><p style="margin-top:14px;max-width:860px">The completed project is strongest when its claims stay tied to verified evidence: descriptive findings remain descriptive, experiment results remain validation results, the 2015 H1 metrics remain the final test result, and the remaining weaknesses remain visible.</p></div>
+  <div class="source">Final evidence base: Phase 5–7 verified reports and Task 2 complete execution / final verification artifacts. Analytical results and df_clean remain unchanged.</div>
+</div></section>
+</div>
+
+<div class="footer-nav"><div class="nav-inner"><button class="nav-btn" id="prev" aria-label="Previous slide">←</button><div class="progress"><i id="progress"></i></div><div class="toc" id="toc" aria-label="Slide navigation"></div><div class="counter" id="counter">01 / 14</div><button class="nav-btn" id="next" aria-label="Next slide">→</button></div></div>
+<div class="footer-credit">
+  © 2026 <b>Noura Maher Elamin</b>
+  · <a href="https://www.linkedin.com/in/nouramaherelamin/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  · <a href="https://github.com/nouramaherelamin" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+<script>
+(function(){
+ const slides=[...document.querySelectorAll('.slide')], toc=document.getElementById('toc'), progress=document.getElementById('progress'), counter=document.getElementById('counter');
+ let current=0;
+ slides.forEach((s,i)=>{const b=document.createElement('button');b.title=(i+1)+'. '+s.dataset.title;b.setAttribute('aria-label',b.title);b.onclick=()=>go(i);toc.appendChild(b)});
+ function go(n){current=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===current));[...toc.children].forEach((b,i)=>b.classList.toggle('active',i===current));progress.style.width=((current+1)/slides.length*100)+'%';counter.textContent=String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');history.replaceState(null,'','#slide-'+(current+1));slides[current].scrollTop=0}
+ function next(){go(current+1)} function prev(){go(current-1)}
+ document.getElementById('next').onclick=next;document.getElementById('prev').onclick=prev;
+ document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();next()}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()}else if(e.key==='Home'){e.preventDefault();go(0)}else if(e.key==='End'){e.preventDefault();go(slides.length-1)}});
+ let sx=null;document.addEventListener('touchstart',e=>{sx=e.changedTouches[0].clientX},{passive:true});document.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)(dx<0?next:prev)();sx=null},{passive:true});
+ const m=location.hash.match(/slide-(\d+)/);if(m)current=Math.min(slides.length-1,Math.max(0,parseInt(m[1],10)-1));go(current);
+})();
+</script>
+</body></html>

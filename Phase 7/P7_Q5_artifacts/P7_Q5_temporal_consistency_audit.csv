@@ -1,0 +1,11 @@
+check,count,status
+pickup_datetime_missing,0,True
+hour_range_invalid,0,True
+day_range_invalid,0,True
+month_range_invalid,0,True
+weekday_range_invalid,0,True
+hour_vs_datetime_mismatch,0,True
+day_vs_datetime_dayofmonth_mismatch,0,True
+month_vs_datetime_mismatch,0,True
+weekday_vs_datetime_mismatch,0,True
+year_vs_datetime_mismatch,0,True

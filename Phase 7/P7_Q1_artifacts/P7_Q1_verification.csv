@@ -1,0 +1,10 @@
+check,value
+df_clean_rows,499965.0
+df_clean_columns,26.0
+fare_nonmissing,499965.0
+fare_missing,0.0
+p99_threshold,52.1359999999986
+p99_upper_tail_count,5000.0
+top_100_rows,100.0
+distance_available_in_p99_tail,4824.0
+distance_missing_in_p99_tail,176.0

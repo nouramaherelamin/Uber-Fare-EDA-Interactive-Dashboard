@@ -1,0 +1,65 @@
+{
+  "source": "/mnt/data/phase3/df_clean.csv",
+  "source_sha256": "1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509",
+  "random_state": 42,
+  "split": {
+    "train": "2009-01-01 to 2013-12-31 23:59:59",
+    "validation": "2014-01-01 to 2014-12-31 23:59:59",
+    "test": "2015-01-01 to 2015-06-30 23:59:59"
+  },
+  "excluded_predictors": [
+    "fare_amount",
+    "key",
+    "User ID",
+    "User Name",
+    "Driver Name"
+  ],
+  "candidate_features": [
+    "pickup_longitude",
+    "pickup_latitude",
+    "dropoff_longitude",
+    "dropoff_latitude",
+    "passenger_count",
+    "hour",
+    "day",
+    "month",
+    "weekday",
+    "year",
+    "jfk_dist",
+    "ewr_dist",
+    "lga_dist",
+    "sol_dist",
+    "nyc_dist",
+    "distance",
+    "bearing",
+    "Car Condition",
+    "Weather",
+    "Traffic Condition"
+  ],
+  "experiments": [
+    "E01_constant_baseline",
+    "E02_ridge_baseline",
+    "E03_hgb_baseline",
+    "E04_distance_representation",
+    "E05_temporal_enhancement",
+    "E06_geographic_enhancement",
+    "E07_reference_distance",
+    "E08_categorical_enhancement",
+    "E09_missing_value_strategy",
+    "E10_log1p_target",
+    "E11_controlled_final_comparison"
+  ],
+  "selection_rule": "lowest validation MAE, RMSE tie-break; final test locked after selection",
+  "selected_validation_candidate": "E10_log1p_target",
+  "test_used": false,
+  "training_on_full_train_plus_validation": false,
+  "selected_final_candidate": "E10_log1p_target",
+  "final_fit_data": "train+validation",
+  "final_test_evaluated": true,
+  "test_metrics": {
+    "MAE": 1.9737903997158042,
+    "RMSE": 5.884111126182446,
+    "R2": 0.7598441210045045
+  },
+  "presentation_created": false
+}

@@ -1,0 +1,13 @@
+check,pass,observed,expected
+source_hash_matches_expected,True,1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509,1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509
+source_rows,True,499965,499965
+source_columns_used_present,True,"['day', 'fare_amount', 'hour', 'key', 'month', 'pickup_datetime', 'split', 'weekday', 'year']","['key', 'fare_amount', 'pickup_datetime', 'year', 'month', 'day', 'weekday', 'hour']"
+no_outside_rows,True,0,0
+train_before_validation,True,2013-12-31 23:41:00,2014-01-01 00:01:00
+validation_before_test,True,2014-12-31 23:50:41,2015-01-01 00:08:30
+duplicate_key_cross_split,True,0,0
+target_missing_total,True,0,0
+target_in_X,False,False,False
+test_preprocessing_fitted,False,False,False
+test_used_for_model_selection,False,False,False
+df_clean_modified,False,False,False

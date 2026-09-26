@@ -1,0 +1,4 @@
+Traffic Condition,count,mean,median
+Congested Traffic,166838,11.391541974849854,8.5
+Dense Traffic,166574,11.36898885780494,8.5
+Flow Traffic,166553,11.317680378017807,8.5

@@ -1,0 +1,14 @@
+check,value,status
+passenger_count_zero,0,True
+distance_gt_1000,0,True
+distance_negative,0,True
+bearing_outside_minus_pi_pi,0,True
+jfk_dist_gt_1000,0,True
+ewr_dist_gt_1000,0,True
+lga_dist_gt_1000,0,True
+sol_dist_gt_1000,0,True
+nyc_dist_gt_1000,0,True
+pickup_longitude_zero_nonmissing,0,True
+pickup_latitude_zero_nonmissing,0,True
+dropoff_longitude_zero_nonmissing,0,True
+dropoff_latitude_zero_nonmissing,0,True

@@ -1,0 +1,2 @@
+group,threshold,n,MAE,RMSE,mean_actual,mean_prediction
+validation_fare>P99,57.33,343,30.507779878047003,46.88977164430377,80.40769679300291,51.0358019354802

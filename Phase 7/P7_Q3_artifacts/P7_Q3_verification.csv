@@ -1,0 +1,11 @@
+check,value,expected,pass
+df_clean_rows,499965,499965,True
+df_clean_columns,26,26,True
+positive_distance_observations_used,484715,484715,True
+temporary_exclusions,15250,15250,True
+missing_distance,9996,9996,True
+nonpositive_distance,5254,5254,True
+missing_fare,0,0,True
+dayparts,4,4,True
+distance_bins_per_daypart,10,10,True
+df_clean_sha256_unchanged,1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509,1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509,True

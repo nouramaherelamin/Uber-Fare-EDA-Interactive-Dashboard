@@ -1,0 +1,9 @@
+metric,value
+fare_missing,0.0
+fare_nonpositive,0.0
+fare_max,500.0
+approved_P7_Q1_p99,52.1359999999986
+approved_P7_Q1_p99_5,57.33
+approved_P7_Q1_p99_9,80.0
+approved_P7_Q1_max,500.0
+approved_P7_Q1_skewness,4.899900724512013

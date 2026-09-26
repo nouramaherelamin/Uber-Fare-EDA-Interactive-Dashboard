@@ -1,0 +1,13 @@
+column,category,count,percent
+Car Condition,Very Good,125306,25.062954406808476
+Car Condition,Bad,124965,24.994749632474274
+Car Condition,Good,124959,24.993549548468394
+Car Condition,Excellent,124735,24.94874641224886
+Weather,sunny,100424,20.08620603442241
+Weather,cloudy,100056,20.012600882061744
+Weather,rainy,99967,19.99479963597452
+Weather,stormy,99947,19.990799355954916
+Weather,windy,99571,19.91559409158641
+Traffic Condition,Congested Traffic,166838,33.36993589551268
+Traffic Condition,Dense Traffic,166574,33.31713219925395
+Traffic Condition,Flow Traffic,166553,33.31293190523336

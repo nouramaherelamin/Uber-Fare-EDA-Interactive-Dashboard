@@ -1,0 +1,11 @@
+check,observed,expected,pass
+source_hash_before,1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509,1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509,True
+source_hash_after,1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509,1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509,True
+df_clean_rows,499965,499965,True
+train_rows,390567,390567,True
+validation_rows,74607,74607,True
+test_rows,34791,34791,True
+cross_split_duplicate_keys,0,0,True
+test_missing_target,0,0,True
+test_used_before_final_lock,False,False,True
+presentation_created,False,False,True

@@ -1,0 +1,13 @@
+check,value
+df_clean_shape,499965x26
+positive_distance_used,484715
+temporary_excluded_total,15250
+missing_distance_rows,9996
+nonpositive_distance_rows,5254
+pearson_raw,0.6826546004444044
+spearman_raw,0.8569198647019999
+pearson_log1p_distance_vs_raw_fare,0.7622955842978301
+pearson_log1p_distance_vs_log1p_fare,0.8664977770083713
+quantile_bins,20
+first_bin_median_fare,4.1
+last_bin_median_fare,37.83

@@ -1,0 +1,7 @@
+feature,missing_count,missing_percent_of_df_clean
+jfk_dist,10294,2.0589441260888264
+ewr_dist,10294,2.0589441260888264
+lga_dist,10294,2.0589441260888264
+sol_dist,10294,2.0589441260888264
+nyc_dist,10294,2.0589441260888264
+fare_amount,0,0.0

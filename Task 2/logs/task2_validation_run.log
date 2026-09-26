@@ -1,0 +1,5 @@
+source_hash=1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509
+rows train=390567 validation=74607 test=34791
+candidate_selected_from_validation=E10_log1p_target
+test_used_for_selection=False
+presentation_created=False

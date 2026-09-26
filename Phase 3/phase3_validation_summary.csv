@@ -1,0 +1,22 @@
+Validation check,Result
+df_raw shape,"(500000, 26)"
+df_clean shape,"(499965, 26)"
+Rows removed,35
+Rows retained,"499,965"
+Percentage removed,0.0070%
+Exact duplicate rows in df_clean,0
+fare_amount <= 0 in df_clean,0
+passenger_count == 0 in df_clean,0
+distance > 1000 in df_clean,0
+reference distance > 1000 cells in df_clean,0
+pickup_datetime missing,0
+Hour mismatch vs datetime,0
+Day mismatch vs datetime,0
+Month mismatch vs datetime,0
+weekday mismatch vs datetime,0
+year mismatch vs datetime,0
+"Bearing outside [-pi, pi] among nonmissing",0
+Week column created,No
+Categories recoded,No
+Columns renamed,No
+Key-based deduplication applied,No

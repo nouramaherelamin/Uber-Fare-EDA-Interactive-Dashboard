@@ -1,0 +1,7 @@
+column,missing_count,nunique,duplicate_rows_excess
+key,0,461173,38792
+User ID,0,499965,0
+User Name,0,221665,278300
+Driver Name,0,221693,278272
+key__duplicated_distinct_values,0,34066,38792
+exact_duplicate_rows,0,0,0

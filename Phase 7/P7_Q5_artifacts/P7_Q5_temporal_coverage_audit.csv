@@ -1,0 +1,6 @@
+metric,value
+year_min,2009
+year_max,2015
+datetime_min,2009-01-01 00:31:32
+datetime_max,2015-06-30 23:38:21
+unique_year_month_periods,78

@@ -1,0 +1,9 @@
+metric,value
+upper_tail_rows,5000.0
+distance_available,4824.0
+distance_missing,176.0
+distance_available_percent,96.48
+fare_over_100_count,214.0
+fare_over_200_count,26.0
+fare_over_300_count,7.0
+fare_over_400_count,5.0

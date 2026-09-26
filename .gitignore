@@ -1,0 +1,8 @@
+﻿final_internship_data.xlsx
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.ipynb_checkpoints/
+Phase 3/df_clean.csv

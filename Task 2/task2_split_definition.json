@@ -1,0 +1,17 @@
+{
+  "source": "/mnt/data/phase3/df_clean.csv",
+  "source_sha256": "1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509",
+  "random_state": 42,
+  "split_strategy": "time-aware chronological calendar-year split",
+  "train": "2009-01-01 through 2013-12-31 23:59:59",
+  "validation": "2014-01-01 through 2014-12-31 23:59:59",
+  "test": "2015-01-01 through 2015-06-30 23:59:59",
+  "rationale": [
+    "Phase 6/P7 evidence documents coverage from 2009-01-01 through 2015-06-30 across 78 year-month periods.",
+    "2015 is explicitly a partial year ending June 30, so it is a natural latest-period holdout without inventing an intra-month cutoff.",
+    "2014 is the immediately preceding complete calendar year and provides a chronological validation period.",
+    "2009-2013 provides the earlier historical period for training.",
+    "Calendar-year boundaries avoid arbitrary within-year date selection while preserving temporal order."
+  ],
+  "status": "split validation only; no model training, preprocessing fitting, predictions, or metric calculation performed."
+}

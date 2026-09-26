@@ -1,0 +1,35 @@
+TASK 2 — E00 SPLIT VALIDATION RECORD
+STATUS: PASS — SPLIT VALIDATION ONLY
+Source: /mnt/data/phase3/df_clean.csv
+SHA256: 1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509
+Rows: 499965
+
+EXACT SPLIT
+train: 2009-01-01 00:00:00 -> 2013-12-31 23:59:59 | rows=390567 | unique_keys=358042 | target_rows=390567
+validation: 2014-01-01 00:00:00 -> 2014-12-31 23:59:59 | rows=74607 | unique_keys=68525 | target_rows=74607
+test: 2015-01-01 00:00:00 -> 2015-06-30 23:59:59 | rows=34791 | unique_keys=34606 | target_rows=34791
+
+RATIONALE
+- Phase 6/P7 evidence documents coverage from 2009-01-01 through 2015-06-30 across 78 year-month periods.
+- 2015 is explicitly a partial year ending June 30, so it is a natural latest-period holdout without inventing an intra-month cutoff.
+- 2014 is the immediately preceding complete calendar year and provides a chronological validation period.
+- 2009-2013 provides the earlier historical period for training.
+- Calendar-year boundaries avoid arbitrary within-year date selection while preserving temporal order.
+
+LEAKAGE / INTEGRITY CHECKS
+source_hash_matches_expected: PASS | observed=1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509 | expected=1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509
+source_rows: PASS | observed=499965 | expected=499965
+source_columns_used_present: PASS | observed=['day', 'fare_amount', 'hour', 'key', 'month', 'pickup_datetime', 'split', 'weekday', 'year'] | expected=['key', 'fare_amount', 'pickup_datetime', 'year', 'month', 'day', 'weekday', 'hour']
+no_outside_rows: PASS | observed=0 | expected=0
+train_before_validation: PASS | observed=2013-12-31 23:41:00 | expected=2014-01-01 00:01:00
+validation_before_test: PASS | observed=2014-12-31 23:50:41 | expected=2015-01-01 00:08:30
+duplicate_key_cross_split: PASS | observed=0 | expected=0
+target_missing_total: PASS | observed=0 | expected=0
+target_in_X: NOT-APPLICABLE / NOT-EXECUTED | observed=False | expected=False
+test_preprocessing_fitted: NOT-APPLICABLE / NOT-EXECUTED | observed=False | expected=False
+test_used_for_model_selection: NOT-APPLICABLE / NOT-EXECUTED | observed=False | expected=False
+df_clean_modified: NOT-APPLICABLE / NOT-EXECUTED | observed=False | expected=False
+
+NO MODEL TRAINING OR PREPROCESSING WAS PERFORMED.
+TEST SET REMAINS UNTOUCHED BY MODELING.
+Elapsed seconds: 3.05

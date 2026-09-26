@@ -1,0 +1,59 @@
+P7-Q4
+df_clean shape: (499965, 6)
+Reference-distance columns: ['jfk_dist', 'ewr_dist', 'lga_dist', 'sol_dist', 'nyc_dist']
+
+Target association summary:
+ feature  observations  pearson_r_with_fare  spearman_r_with_fare  mean_feature  median_feature
+jfk_dist        489671            -0.265021             -0.187893     41.954763       42.480336
+ewr_dist        489671             0.275987              0.147962     35.766383       34.670782
+lga_dist        489671             0.079585              0.054560     19.660901       19.497262
+sol_dist        489671             0.248432              0.108968     19.006636       18.207566
+nyc_dist        489671             0.290524              0.148133     11.271853       10.327864
+
+Pearson redundancy matrix:
+          jfk_dist  ewr_dist  lga_dist  sol_dist  nyc_dist
+jfk_dist  1.000000  0.367998  0.587271  0.461160  0.447220
+ewr_dist  0.367998  1.000000  0.397319  0.977466  0.969378
+lga_dist  0.587271  0.397319  1.000000  0.380854  0.431180
+sol_dist  0.461160  0.977466  0.380854  1.000000  0.992120
+nyc_dist  0.447220  0.969378  0.431180  0.992120  1.000000
+
+Spearman redundancy matrix:
+          jfk_dist  ewr_dist  lga_dist  sol_dist  nyc_dist
+jfk_dist  1.000000  0.020864 -0.101814  0.205499  0.211599
+ewr_dist  0.020864  1.000000 -0.821442  0.969622  0.952550
+lga_dist -0.101814 -0.821442  1.000000 -0.803823 -0.756030
+sol_dist  0.205499  0.969622 -0.803823  1.000000  0.984165
+nyc_dist  0.211599  0.952550 -0.756030  0.984165  1.000000
+
+Pairwise complete-observation counts:
+          jfk_dist  ewr_dist  lga_dist  sol_dist  nyc_dist
+jfk_dist  489671.0  489671.0  489671.0  489671.0  489671.0
+ewr_dist  489671.0  489671.0  489671.0  489671.0  489671.0
+lga_dist  489671.0  489671.0  489671.0  489671.0  489671.0
+sol_dist  489671.0  489671.0  489671.0  489671.0  489671.0
+nyc_dist  489671.0  489671.0  489671.0  489671.0  489671.0
+
+Missingness:
+    feature  missing_count  missing_percent_of_df_clean
+   jfk_dist          10294                     2.058944
+   ewr_dist          10294                     2.058944
+   lga_dist          10294                     2.058944
+   sol_dist          10294                     2.058944
+   nyc_dist          10294                     2.058944
+fare_amount              0                     0.000000
+
+Verification:
+                          check                                                            value                                                         expected pass
+                  df_clean_rows                                                           499965                                                           499965 True
+         selected_columns_count                                                                6                                                                6 True
+                   fare_missing                                                                0                                                                0 True
+reference_distance_missing_each                                                            10294                                                            10294 True
+            target_summary_rows                                                                5                                                                5 True
+           pearson_matrix_shape                                                           (5, 5)                                                           (5, 5) True
+          spearman_matrix_shape                                                           (5, 5)                                                           (5, 5) True
+      pairwise_overlap_diagonal                                                           489671                                                           489671 True
+      df_clean_sha256_unchanged 1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509 1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509 True
+
+SHA unchanged: True
+Artifact zip: /mnt/data/phase7/P7_Q4_artifacts.zip

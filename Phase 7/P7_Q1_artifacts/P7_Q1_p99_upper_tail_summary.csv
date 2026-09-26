@@ -1,0 +1,10 @@
+metric,value
+threshold_p99,52.1359999999986
+n_upper_tail,5000.0
+percent_of_nonmissing_fare,1.000070004900343
+mean_fare_upper_tail,64.638072
+median_fare_upper_tail,57.33
+min_fare_upper_tail,52.2
+max_fare_upper_tail,500.0
+median_distance_upper_tail,20.03147963156556
+mean_distance_upper_tail,17.954916936335298

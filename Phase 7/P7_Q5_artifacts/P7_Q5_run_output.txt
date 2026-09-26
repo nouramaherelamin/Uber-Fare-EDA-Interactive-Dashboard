@@ -1,0 +1,33 @@
+{
+  "status": "COMPLETED AND VERIFIED",
+  "source": "/mnt/data/phase3/df_clean.csv",
+  "shape": [
+    499965,
+    26
+  ],
+  "sha256_before": "1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509",
+  "sha256_after": "1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509",
+  "q1_q4_rerun": false,
+  "q4_conditional_distance_band_diagnostic": false,
+  "df_clean_modified": false,
+  "modeling_started": false,
+  "presentation_started": false
+}
+
+Verification table:
+                        check                                                           actual                                                         expected  pass
+               df_clean_shape                                                      499965 x 26                                                      499965 x 26  True
+              df_clean_sha256 1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509 1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509  True
+                 schema_exact                                                             True                                                             True  True
+                 fare_missing                                                                0                                                                0  True
+             fare_nonpositive                                                                0                                                                0  True
+               passenger_zero                                                                0                                                                0  True
+             distance_gt_1000                                                                0                                                                0  True
+reference_gt_1000_total_cells                                                                0                                                                0  True
+        bearing_outside_range                                                                0                                                                0  True
+             datetime_missing                                                                0                                                                0  True
+    temporal_mismatches_total                                                                0                                                                0  True
+         exact_duplicate_rows                                                                0                                                                0  True
+  hash_unchanged_during_audit                                                             True                                                             True  True
+            q4_not_recomputed           Q4 numerical matrix imported as approved evidence only                                                      No Q4 rerun  True
+      q1_q2_q3_not_recomputed              Prior approved outputs referenced only where needed                                                         No rerun  True

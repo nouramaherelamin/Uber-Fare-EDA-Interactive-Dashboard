@@ -1,0 +1,10 @@
+check,value,expected,pass
+df_clean_rows,499965,499965,True
+selected_columns_count,6,6,True
+fare_missing,0,0,True
+reference_distance_missing_each,10294,10294,True
+target_summary_rows,5,5,True
+pearson_matrix_shape,"(5, 5)","(5, 5)",True
+spearman_matrix_shape,"(5, 5)","(5, 5)",True
+pairwise_overlap_diagonal,489671,489671,True
+df_clean_sha256_unchanged,1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509,1170f27c73a777dacd0c4712b75088ccdb1cdacb7c955368d5239a77bbad9509,True

@@ -1,0 +1,9 @@
+Metric,Value
+Rows,499965
+Columns,26
+Exact duplicate rows,0
+Fare missing,0
+Distance missing,9996
+Passenger count missing,1796
+Datetime min,2009-01-01 00:31:32
+Datetime max,2015-06-30 23:38:21
